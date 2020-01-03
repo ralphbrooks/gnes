@@ -39,6 +39,7 @@ class PyTorchTransformers(BaseTextEncoder):
             TransfoXLModel, TransfoXLTokenizer, XLNetModel, XLNetTokenizer, \
             XLMModel, XLMTokenizer, RobertaModel, RobertaTokenizer
         # select the model, tokenizer & weight accordingly
+        self.logger.info("RAB - inside transformer post_init")
         model_class, tokenizer_class, pretrained_weights = \
             {k[-1]: k for k in
              [(BertModel, BertTokenizer, 'bert-base-uncased'),
