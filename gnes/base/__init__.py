@@ -281,7 +281,14 @@ class TrainableBase(metaclass=TrainableType):
                 return yaml.load(fp)
         else:
             with filename:
-                return yaml.load(filename)
+                # RAB - The following are RAB changes to find out where the model is breaking
+                logger = set_logger("Trainable Base", True)
+                logger.info("RAB - Before the YAML LOAD")
+                result = yaml.load(filename)
+                logger.info("RAB - After the YAML LOAD")
+                return result
+
+                # return yaml.load(filename)
 
     @staticmethod
     @profiling
