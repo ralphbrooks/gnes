@@ -55,9 +55,19 @@ class PyTorchTransformers(BaseTextEncoder):
         self.logger.info(f"RAB - Type tokenizer_class {type(tokenizer_class)}")
 
         def load_model_tokenizer(x):
-            return model_class.from_pretrained(x).eval(), tokenizer_class.from_pretrained(x)
+
+            # TODO - finish RAB Expansion
+            self.logger.info(f"RAB - before mode_eval")
+            model_eval = model_class.from_pretrained(x).eval()
+            self.logger.info(f"RAB - before pretrained tokenizer")
+            pre_trained_tokenizer_class =  tokenizer_class.from_pretrained(x)
+            self.logger.info(f"RAB - after pretrained tokenizer")
+            return model_eval, pre_trained_tokenizer_class
+
+            #return model_class.from_pretrained(x).eval(), tokenizer_class.from_pretrained(x)
 
         try:
+            self.logger.info(f"RAB - work_dir: {self.work_dir}")
             self.model, self.tokenizer = load_model_tokenizer(self.work_dir)
             self.logger.info(f"RAB - after all of the post init work ")
         except Exception:
