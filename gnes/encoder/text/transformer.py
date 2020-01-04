@@ -30,6 +30,7 @@ class PyTorchTransformers(BaseTextEncoder):
                  pooling_layer: int = 0,
                  *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.logger.info(f"RAB - init model name: {model_name}")
         self.model_name = model_name
         self.pooling_layer = pooling_layer
 
@@ -40,6 +41,7 @@ class PyTorchTransformers(BaseTextEncoder):
             XLMModel, XLMTokenizer, RobertaModel, RobertaTokenizer
         # select the model, tokenizer & weight accordingly
         self.logger.info("RAB - inside transformer post_init")
+        self.logger.info(f"RAB - model name: {self.model_name}")
         model_class, tokenizer_class, pretrained_weights = \
             {k[-1]: k for k in
              [(BertModel, BertTokenizer, 'bert-base-uncased'),
