@@ -51,8 +51,8 @@ class PyTorchTransformers(BaseTextEncoder):
               (XLNetModel, XLNetTokenizer, 'xlnet-base-cased'),
               (XLMModel, XLMTokenizer, 'xlm-mlm-enfr-1024'),
               (RobertaModel, RobertaTokenizer, 'roberta-base')]}[self.model_name]
-        self.logger.info(f"RAB - Type model_class {type(model_class)}")
-        self.logger.info(f"RAB - Type tokenizer_class {type(tokenizer_class)}")
+        self.logger.info(f"RAB - Type model_class {model_class.__name__}")
+        self.logger.info(f"RAB - Type tokenizer_class {tokenizer_class.__name__}")
 
         def load_model_tokenizer(x):
 
