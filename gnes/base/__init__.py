@@ -173,9 +173,9 @@ class TrainableBase(metaclass=TrainableType):
     store_args_kwargs = False
 
     def __init__(self, *args, **kwargs):
-        self.logger.info("RAB - inside the traininable base")
         self.verbose = 'verbose' in kwargs and kwargs['verbose']
         self.logger = set_logger(self.__class__.__name__, self.verbose)
+        self.logger.info("RAB - inside the traininable base")
         self._post_init_vars = set()
 
     def _post_init_wrapper(self):
