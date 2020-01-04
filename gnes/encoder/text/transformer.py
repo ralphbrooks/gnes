@@ -51,12 +51,15 @@ class PyTorchTransformers(BaseTextEncoder):
               (XLNetModel, XLNetTokenizer, 'xlnet-base-cased'),
               (XLMModel, XLMTokenizer, 'xlm-mlm-enfr-1024'),
               (RobertaModel, RobertaTokenizer, 'roberta-base')]}[self.model_name]
+        self.logger.info(f"RAB - Type model_class {type(model_class)}")
+        self.logger.info(f"RAB - Type tokenizer_class {type(tokenizer_class)}")
 
         def load_model_tokenizer(x):
             return model_class.from_pretrained(x).eval(), tokenizer_class.from_pretrained(x)
 
         try:
             self.model, self.tokenizer = load_model_tokenizer(self.work_dir)
+            self.logger.info(f"RAB - after all of the post init work ")
         except Exception:
             self.logger.warning('cannot deserialize model/tokenizer from %s, will download from web' % self.work_dir)
             self.model, self.tokenizer = load_model_tokenizer(pretrained_weights)
