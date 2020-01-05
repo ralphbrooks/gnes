@@ -305,12 +305,14 @@ def send_message(sock: 'zmq.Socket', msg: 'gnes_pb2.Message', timeout: int = -1,
 
 def recv_message(sock: 'zmq.Socket', timeout: int = -1, check_version: bool = False, **kwargs) -> Optional[
     'gnes_pb2.Message']:
+    print("RAB - inside recv message - print")
     try:
         if timeout > 0:
             sock.setsockopt(zmq.RCVTIMEO, timeout)
         else:
             sock.setsockopt(zmq.RCVTIMEO, -1)
 
+        print("RAB - recv - step 1")
         msg = gnes_pb2.Message()
         msg_data = sock.recv_multipart()
         msg.ParseFromString(msg_data[1])
