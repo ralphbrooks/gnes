@@ -108,6 +108,7 @@ class ZmqClient:
         _send_message(self.sender, message, **kwargs)
 
     def recv_message(self, **kwargs) -> gnes_pb2.Message:
+        self.logger.debug("RAB - inside recv message")
         r = _recv_message(self.receiver, **kwargs)
         self.logger.debug('recv a message: %s' % r.envelope)
         return r
