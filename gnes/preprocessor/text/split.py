@@ -44,8 +44,12 @@ class SentSplitPreprocessor(BaseTextPreprocessor):
         else:
             doc.raw_text = d
 
+        self.logger.info("RAB - SentSplitProcessor - inside apply")
+        # TODO - I really need to understand what is going on at this step!!!!
+
         ret = [(m.group(0), m.start(), m.end()) for m in
                re.finditer(r'[^{0}]+[{0}]'.format(self.deliminator), doc.raw_text)]
+
         if not ret:
             ret = [(doc.raw_text, 0, len(doc.raw_text))]
         for ci, (r, s, e) in enumerate(ret):

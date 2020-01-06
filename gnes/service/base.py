@@ -424,10 +424,14 @@ class BaseService(metaclass=ConcurrentService):
         # print('!!!! t_id: %d service_context: %r' % (threading.get_ident(), self.handler.service_context))
         self.logger.info('bind sockets...')
         if self.ctrl_with_ipc:
+            self.logger.info('RAB BEFORE BUILD SOCKET- ctrl with ipc')
             ctrl_sock, ctrl_addr = build_socket(ctx, self.ctrl_addr, None, SocketType.PAIR_BIND,
                                                 use_ipc=self.ctrl_with_ipc)
+            self.logger.info('RAB AFTER BUILD SOCKET- ctrl with ipc')
         else:
+            self.logger.info('RAB BEFORE BUILD SOCKET-  NO ctrl with ipc')
             ctrl_sock, ctrl_addr = build_socket(ctx, self.default_host, self.args.port_ctrl, SocketType.PAIR_BIND)
+            self.logger.info('RAB AFTER BUILD SOCKET-  NO ctrl with ipc')
 
         self.logger.info('control over %s' % (colored(ctrl_addr, 'yellow')))
 
