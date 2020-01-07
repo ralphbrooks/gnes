@@ -20,6 +20,9 @@ import string
 from ..base import BaseTextPreprocessor
 from ...proto import gnes_pb2
 
+# RAB add
+import remote_pdb
+
 
 class SentSplitPreprocessor(BaseTextPreprocessor):
     def __init__(self,
@@ -37,6 +40,10 @@ class SentSplitPreprocessor(BaseTextPreprocessor):
     def apply(self, doc: 'gnes_pb2.Document') -> None:
         super().apply(doc)
         d = doc.raw_bytes.decode()
+
+        # RAB Add
+        remote_pdb.set_trace(host='0.0.0.0', port=4444)
+
         if self.is_json:
             d = json.loads(d)
             doc.raw_text = d.pop('Content')
