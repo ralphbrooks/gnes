@@ -340,11 +340,13 @@ def set_grpc_service_parser(parser=None):
                         help='the api name for calling the stub')
     return parser
 
+import remote_pdb
 
 def set_frontend_parser(parser=None):
     from ..service.base import SocketType
     if not parser:
         parser = set_base_parser()
+    remote_pdb.set_trace(host='0.0.0.0', port=4445)
     set_service_parser(parser)
     _set_grpc_parser(parser)
     parser.set_defaults(socket_in=SocketType.PULL_BIND,

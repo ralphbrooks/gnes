@@ -139,6 +139,7 @@ class GrpcClient:
             }.items(),
         )
         self.logger.info('waiting channel to be ready...')
+        # TODO the following is where the process gets stuck
         grpc.channel_ready_future(self._channel).result()
 
         # create new stub
