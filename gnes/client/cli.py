@@ -24,9 +24,12 @@ from termcolor import colored
 from .base import GrpcClient
 from ..proto import RequestGenerator
 
+import remote_pdb
 
 class CLIClient(GrpcClient):
     def __init__(self, args, start_at_init: bool = True):
+        # TODO - In theory if I recompile - I should be able to trace through starting here
+        remote_pdb.set_trace(host='0.0.0.0', port=4444)
         super().__init__(args)
         self._bytes_generator = self._get_bytes_generator_from_args(args)
         if start_at_init:
