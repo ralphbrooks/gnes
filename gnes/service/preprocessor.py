@@ -25,6 +25,11 @@ class PreprocessorService(BS):
         from ..preprocessor.base import BasePreprocessor
         self._model = self.load_model(BasePreprocessor)
 
+    # There is this concept of the handler register.
+    # handler is a function register can take a list, tuple, or type
+    # It is simply recording information
+
+
     @handler.register(gnes_pb2.Request.TrainRequest)
     def _handler_train(self, msg: 'gnes_pb2.Message'):
         for d in msg.request.train.docs:

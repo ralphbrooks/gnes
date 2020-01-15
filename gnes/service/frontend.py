@@ -26,13 +26,17 @@ from ..helper import set_logger, make_route_table
 from ..proto import gnes_pb2_grpc, gnes_pb2, router2str, add_route, add_version
 
 
+import remote_pdb
+
 class FrontendService:
 
     def __init__(self, args):
+        remote_pdb.set_trace(host='0.0.0.0', port=4447)
         if not args.proxy:
             os.unsetenv('http_proxy')
             os.unsetenv('https_proxy')
         self.logger = set_logger(self.__class__.__name__, args.verbose)
+        self.logger.info("RAB - inside the FrontendService")
         self.server = grpc.server(
             ThreadPoolExecutor(max_workers=args.max_concurrency),
             options=[('grpc.max_send_message_length', args.max_message_size),
