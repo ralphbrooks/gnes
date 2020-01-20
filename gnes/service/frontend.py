@@ -45,16 +45,24 @@ class FrontendService:
         gnes_pb2_grpc.add_GnesRPCServicer_to_server(self._Servicer(args), self.server)
 
         self.bind_address = '{0}:{1}'.format(args.grpc_host, args.grpc_port)
+        # TODO - At the point where it adds 0.0.0.0 8800 it is getting the error
+        # import subprocess
+        # 8800 is NOT engaged at the point where I am assigning a port
+        # print(subprocess.check_output(["/usr/bin/lsof", "-i", ":8800"]))
+
         self.server.add_insecure_port(self.bind_address)
         self._stop_event = threading.Event()
 
     def __enter__(self):
+        remote_pdb.set_trace(host='0.0.0.0', port=4448)
+        self.logger.info("RAB - FrontendService - enter")
         self.server.start()
         self.logger.critical('listening at: %s' % self.bind_address)
         self._stop_event.clear()
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
+        self.logger.info("RAB - FrontendService - exit")
         self.server.stop(None)
         self.stop()
 
