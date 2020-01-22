@@ -31,7 +31,7 @@ import remote_pdb
 class FrontendService:
 
     def __init__(self, args):
-        remote_pdb.set_trace(host='0.0.0.0', port=4447)
+        # remote_pdb.set_trace(host='0.0.0.0', port=4447)
         if not args.proxy:
             os.unsetenv('http_proxy')
             os.unsetenv('https_proxy')
@@ -54,7 +54,7 @@ class FrontendService:
         self._stop_event = threading.Event()
 
     def __enter__(self):
-        remote_pdb.set_trace(host='0.0.0.0', port=4448)
+        # remote_pdb.set_trace(host='0.0.0.0', port=4448)
         self.logger.info("RAB - FrontendService - enter")
         self.server.start()
         self.logger.critical('listening at: %s' % self.bind_address)
