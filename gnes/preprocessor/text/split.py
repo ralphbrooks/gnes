@@ -42,7 +42,7 @@ class SentSplitPreprocessor(BaseTextPreprocessor):
         d = doc.raw_bytes.decode()
 
         # RAB Add
-        # remote_pdb.set_trace(host='0.0.0.0', port=4444)
+        remote_pdb.set_trace(host='0.0.0.0', port=4444)
 
         if self.is_json:
             d = json.loads(d)
