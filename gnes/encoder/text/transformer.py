@@ -77,6 +77,7 @@ class PyTorchTransformers(BaseTextEncoder):
     @batching
     def encode(self, text: List[str], *args, **kwargs) -> Tuple:
         # encoding and padding
+        self.logger.info(f"RAB - PytorchTransformers - encode - {self.model_name}")
         ids = [self.tokenizer.encode(t) for t in text]
         max_len = max(len(t) for t in ids)
         ids = [t + [0] * (max_len - len(t)) for t in ids]

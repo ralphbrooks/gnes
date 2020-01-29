@@ -42,7 +42,7 @@ class SentSplitPreprocessor(BaseTextPreprocessor):
         d = doc.raw_bytes.decode()
 
         # RAB Add
-        remote_pdb.set_trace(host='0.0.0.0', port=4444)
+        # remote_pdb.set_trace(host='0.0.0.0', port=4444)
 
         if self.is_json:
             d = json.loads(d)
@@ -54,6 +54,7 @@ class SentSplitPreprocessor(BaseTextPreprocessor):
         self.logger.info("RAB - SentSplitProcessor - inside apply")
         # TODO - I really need to understand what is going on at this step!!!!
 
+        # This code here is what is doing the natural split.
         ret = [(m.group(0), m.start(), m.end()) for m in
                re.finditer(r'[^{0}]+[{0}]'.format(self.deliminator), doc.raw_text)]
 
